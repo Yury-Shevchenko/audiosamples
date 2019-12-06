@@ -58,7 +58,7 @@ class Recorder extends React.Component {
      data.append('title', this.state.formData.title)
      data.append('author', this.state.formData.author)
      data.append('filename', this.state.filename)
-     axios.post("http://localhost:3010/api/upload", data, { // receive two parameter endpoint url ,form data
+     axios.post("https://samply.tk/api/upload", data, { // receive two parameter endpoint url ,form data
       })
       .then(res => { // then print response status
         this.props.onUpload(res.data);

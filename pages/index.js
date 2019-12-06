@@ -12,7 +12,7 @@ export default class extends React.Component {
         .toArray()
       return { list }
     }
-    const { list } = await superagent.get('http://localhost:3000/api')
+    const { list } = await superagent.get('https://samply.tk/api')
       .then(res => res.body)
     return { list }
   }
@@ -34,7 +34,7 @@ export default class extends React.Component {
 
   remove (_id) {
     return ev => {
-      superagent.del(`http://localhost:3000/api/${_id}`)
+      superagent.del(`https://samply.tk/api/${_id}`)
         .then(() => {
           const state = this.state || {}
           const list = this.state.list || this.props.list || []
@@ -55,7 +55,7 @@ export default class extends React.Component {
   //       formData: { author: '', title: '' }
   //     }))
   //
-  //     superagent.post('http://localhost:3000/api', formData)
+  //     superagent.post('https://samply.tk/api', formData)
   //       .then(res => {
   //         const state = this.state || {}
   //         const list = this.state.list || this.props.list || []

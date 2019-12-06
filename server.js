@@ -13,7 +13,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 const MONGO_URL = 'mongodb://admin:stutter1@ds237337.mlab.com:37337/stutter'
-const PORT = 3000
+const PORT = 3010
 
 co(function * () {
   yield app.prepare()

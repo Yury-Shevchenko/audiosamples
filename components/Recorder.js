@@ -58,7 +58,7 @@ class Recorder extends React.Component {
      data.append('title', this.state.formData.title)
      data.append('author', this.state.formData.author)
      data.append('filename', this.state.filename)
-     axios.post("https://samply.tk/api/upload", data, { // receive two parameter endpoint url ,form data
+     axios.post('/api/upload', data, { // receive two parameter endpoint url ,form data
       })
       .then(res => { // then print response status
         this.props.onUpload(res.data);
@@ -100,6 +100,9 @@ class Recorder extends React.Component {
     const { formData } = this.state
     return (
         <div id="container">
+          <h1>
+            Recorder
+          </h1>
           <div id="input-book">
             <form>
               <input
@@ -114,60 +117,12 @@ class Recorder extends React.Component {
                 placeholder="Author" />
             </form>
           </div>
-
           <header>
             <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
             <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
             <button onClick={this.save} disabled={this.state.isRecording || !this.state.blobURL || this.isFormInvalid()}>Save</button>
           </header>
-          <audio src={this.state.blobURL} controls="controls" />
-          <style jsx>{`
-            div {
-              font-family: 'Helvetica', 'sans-serif';
-            }
-            #container {
-              width: 800px;
-              margin-left: auto;
-              margin-right: auto;
-            }
-            h1 {
-              color: #ccbc1d;
-            }
-            button {
-              cursor: pointer;
-              font-weight: bold;
-              border: 1px solid grey;
-              border-radius: 2px;
-              padding: 5px;
-              padding-left: 8px;
-              padding-right: 8px;
-              margin: 5px;
-            }
-            input {
-              padding: 5px;
-              border: 0px;
-              background-color: #f0f0f0;
-              margin: 5px;
-            }
-            .description {
-              position: relative;
-              top: -0.2em;
-            }
-            .remove {
-              cursor: pointer;
-              color: #ff257b;
-              font-size: 1.5em;
-            }
-            .description {
-              position: relative;
-              top: -0.2em;
-            }
-            .remove {
-              cursor: pointer;
-              color: #ff257b;
-              font-size: 1.5em;
-            }
-          `}</style>
+          { this.state.blobURL && <audio src={this.state.blobURL} controls="controls" />}
         </div>
     )
   }

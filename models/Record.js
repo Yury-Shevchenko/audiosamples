@@ -10,9 +10,9 @@ const recordSchema = new Schema({
         default      : Date.now
     },
     user             : {
-                        type: mongoose.Schema.ObjectId,
-                        ref: 'User'
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'user'
                        },
 })
 
-module.exports = mongoose.model('Record', recordSchema);
+module.exports = mongoose.model('record', recordSchema);

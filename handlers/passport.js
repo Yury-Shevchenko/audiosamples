@@ -1,6 +1,6 @@
 const passport = require('passport')
 const mongoose = require('mongoose')
-const User = mongoose.model('User')
+const User = mongoose.model('user')
 const validator = require('validator')
 
 const LocalStrategy = require('passport-local').Strategy

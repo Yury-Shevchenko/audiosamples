@@ -1,27 +1,43 @@
-import Layout from '../components/MyLayout';
-import Recorder from '../components/Recorder';
-import RecordComponent from '../components/Record';
-import React from 'react';
-import * as superagent from 'superagent';
-import styled from "styled-components";
-const mongoose = require('mongoose')
-const Record = mongoose.model('Record')
+import Layout from '../components/MyLayout'
+import Recorder from '../components/Recorder'
+import RecordComponent from '../components/Record'
+import React from 'react'
+import * as superagent from 'superagent'
+import styled from "styled-components"
+
+
 
 export default class extends React.Component {
   static async getInitialProps ({ req }) {
-    if (req) {
-      // const { db } = req
-      const list = await Record.find({ user: req.user._id }).sort({ createdAt: -1 })
-      // const list = await Record.find({  }).sort({ createdAt: -1 })
-      // console.log('list', list)
-        // .toArray()
-      return { list }
-    }
-    const list = await superagent.get('/api')
-      .then(res => res.body)
-    // console.log('list client', list)
+    if (process.browser) {
+      console.log('browser')
+      const list = await superagent.get('/api')
+        .then(res => res.body)
 
-    return { list }
+      return { list }
+    } else {
+      if (req && req.user) {
+        console.log('server')
+        const mongoose = require('mongoose')
+        const Record = mongoose.model('record')
+        const list = await Record.find({ user: req.user._id }).sort({ createdAt: -1 })
+        return { list }
+      }
+    }
+
+    // if (req) {
+    //   // const { db } = req
+    //   const list = await Record.find({ user: req.user._id }).sort({ createdAt: -1 })
+    //   // const list = await Record.find({  }).sort({ createdAt: -1 })
+    //   // console.log('list', list)
+    //     // .toArray()
+    //   return { list }
+    // }
+    // const list = await superagent.get('/api')
+    //   .then(res => res.body)
+    // // console.log('list client', list)
+    //
+    // return { list }
   }
 
   constructor () {

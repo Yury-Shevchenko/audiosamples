@@ -1,7 +1,5 @@
 'use strict'
 
-const mongoose = require('mongoose')
-
 require("dotenv").config()
 const cookieParser = require('cookie-parser')
 // const { MongoClient } = require('mongodb')
@@ -20,13 +18,15 @@ const MongoStore = require('connect-mongo')(session);
 const uid = require('uid-safe')
 
 // database connection
+const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
-const Record = require('./models/Record')
-const User = require('./models/User')
+
+require('./models/User')
+require('./models/Record')
 
 // next app
 const dev = process.env.NODE_ENV !== 'production'
@@ -99,14 +99,14 @@ app.prepare().then( async () => {
 
   server.use(authRoutes)
   server.use('/api', databaseRoutes)
-
+  server.get('*', (req, res) => handle(req, res))
   // you are restricting access to some routes
-  const restrictAccess = (req, res, next) => {
-    if (!req.isAuthenticated()) return res.redirect("/login");
-    next();
-  };
+  // const restrictAccess = (req, res, next) => {
+  //   if (!req.isAuthenticated()) return res.redirect("/login");
+  //   next();
+  // };
 
-  server.use("/profile", restrictAccess)
+  // server.use("/profile", restrictAccess)
 
 
   // server.use((req, res, next) => {
@@ -117,7 +117,7 @@ app.prepare().then( async () => {
 
   server.use(cors())
 
-  server.get('*', (req, res) => handle(req, res))
+
 
   server.listen(process.env.PORT)
   console.log(`Listening on ${process.env.PORT}`)

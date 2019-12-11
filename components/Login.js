@@ -76,7 +76,7 @@ class Login extends React.Component {
      })
      .then(res => { // then print response status
 
-       // console.log('res', res)
+       console.log('res', res.request.responseURL.split('/').pop())
        Router.push(`/${res.request.responseURL.split('/').pop()}`)
      })
   }

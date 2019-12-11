@@ -28,7 +28,7 @@ class MyApp extends App {
   constructor(props) {
     super(props)
     this.state = {
-      user: props.pageProps.user
+      user: props.pageProps && props.pageProps.user || undefined
     }
   }
 

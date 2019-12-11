@@ -11,22 +11,29 @@ const StyledRecord = styled.div`
   }
 `;
 
-export default function Record({ record, onRemove }) {
-  return (
-    <StyledRecord>
-      <div>
+export default class extends React.Component {
+
+  render(){
+    return (
+      <StyledRecord>
         <div>
-          <span className="remove" onClick={onRemove(record._id)}>
-            &times;
-          </span>&nbsp;
-          <i>{record.title}</i> by {record.author} at <Moment format="YYYY-MM-DD HH:mm:ss">{record.createdAt}</Moment>
+          <div>
+            <span className="remove" onClick={this.props.onRemove(this.props.record._id)}>
+              &times;
+            </span>&nbsp;
+            <i>{this.props.record.title}</i> by {this.props.record.author} at <Moment format="YYYY-MM-DD HH:mm:ss">{this.props.record.createdAt}</Moment>
+          </div>
+          <div>
+            <span>
+              <audio src={`/api/play/${this.props.record._id}`} controls="controls" />
+            </span>
+          </div>
         </div>
-        <div>
-          <span>
-            <audio src={`/api/play/${record._id}`} controls="controls" />
-          </span>
-        </div>
-      </div>
-    </StyledRecord>
-  );
+      </StyledRecord>
+    )
+  }
 }
+
+// export default function Record({ record, onRemove }) {
+//
+// }

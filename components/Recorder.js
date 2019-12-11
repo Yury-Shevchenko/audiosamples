@@ -19,8 +19,9 @@ class Recorder extends React.Component {
       buffer: '',
       file: null,
       isBlocked: false,
-      formData: { author: '', title: ''},
-      filename: ''
+      formData: { title: '' },
+      filename: '',
+      author: ''
     };
   }
 
@@ -56,7 +57,7 @@ class Recorder extends React.Component {
      const data = new FormData()
      data.append('file', this.state.file)
      data.append('title', this.state.formData.title)
-     data.append('author', this.state.formData.author)
+     data.append('author', this.state.author)
      data.append('filename', this.state.filename)
      axios.post('/api/upload', data, { // receive two parameter endpoint url ,form data
       })
@@ -80,7 +81,7 @@ class Recorder extends React.Component {
    isFormInvalid = () => {
      const state = this.state || {}
      const formData = state.formData || {}
-     return !formData.author || !formData.title
+     return !formData.title
    }
 
   componentDidMount() {
@@ -94,6 +95,9 @@ class Recorder extends React.Component {
         this.setState({ isBlocked: true })
       },
     );
+    if (this.props.user && this.props.user.name){
+      this.setState({ author: this.props.user.name })
+    }
   }
 
   render() {
@@ -110,17 +114,12 @@ class Recorder extends React.Component {
                 onChange={this.setForm('title')}
                 value={formData.title}
                 placeholder="Title" />
-              <input
-                type="text"
-                onChange={this.setForm('author')}
-                value={formData.author}
-                placeholder="Author" />
             </form>
           </div>
           <header>
             <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
             <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
-            <button onClick={this.save} disabled={this.state.isRecording || !this.state.blobURL || this.isFormInvalid()}>Save</button>
+            <button onClick={this.save} disabled={this.state.isRecording || !this.state.blobURL }>Save</button>
           </header>
           { this.state.blobURL && <audio src={this.state.blobURL} controls="controls" />}
         </div>

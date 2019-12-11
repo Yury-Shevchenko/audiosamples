@@ -25,8 +25,8 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
   console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
 });
-require('./models/Record')
-require('./models/User')
+const Record = require('./models/Record')
+const User = require('./models/User')
 
 // next app
 const dev = process.env.NODE_ENV !== 'production'

@@ -70,14 +70,10 @@ class Login extends React.Component {
   }
 
   signin = (data) => {
-    // console.log('signing in with', data);
-
     axios.post('/login', data, { // receive two parameter endpoint url ,form data
      })
      .then(res => { // then print response status
-
-       console.log('res', res.request.responseURL.split('/').pop())
-       Router.push(`/${res.request.responseURL.split('/').pop()}`)
+       window.location.href = '/record';
      })
   }
 

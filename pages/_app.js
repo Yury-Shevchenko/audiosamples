@@ -7,21 +7,13 @@ import App from "next/app"
 class MyApp extends App {
 
   static async getInitialProps({ Component, ctx, req }) {
-
     let pageProps = {};
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
     if (ctx.req && ctx.req.user) {
-      // console.log('ctx.req.user', ctx.req.user)
       pageProps.user = ctx.req.user
     }
-    // else {
-    //   const user = await superagent.get('/user')
-    //     .then(res => res.body)
-    //   console.log('user', user)
-    //   pageProps.user = user
-    // }
     return { pageProps }
   }
 

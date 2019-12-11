@@ -19,10 +19,6 @@ const session = require("express-session")
 const MongoStore = require('connect-mongo')(session);
 const uid = require('uid-safe')
 
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
-
 // database connection
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
@@ -31,6 +27,11 @@ mongoose.connection.on('error', (err) => {
 });
 require('./models/Record')
 require('./models/User')
+
+// next app
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
 
 // have to require models before using them
 require('./handlers/passport')

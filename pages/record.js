@@ -52,19 +52,27 @@ export default class extends React.Component {
     const list = this.state.list || this.props.list
     return (
       <Layout>
-        <Recorder onUpload={this.onUpload}  user={this.props.user} />
-        <h1>
-          Your records
-        </h1>
-        <div id="reading-list">
-          <ul>
-            {
-              list && list.map(record => (
-                <RecordComponent record={record} onRemove={this.remove} key={record._id} />
-              ))
-            }
-          </ul>
-        </div>
+        {this.props.user ?
+          <>
+            <Recorder onUpload={this.onUpload}  user={this.props.user} />
+            <h1>
+              Your records
+            </h1>
+            <div id="reading-list">
+              <ul>
+                {
+                  list && list.map(record => (
+                    <RecordComponent record={record} onRemove={this.remove} key={record._id} />
+                  ))
+                }
+              </ul>
+            </div>
+          </>
+          :
+          <>
+            <p>Please sign up or login first.</p>
+          </>
+        }
       </Layout>
     )
   }

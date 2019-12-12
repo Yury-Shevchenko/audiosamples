@@ -63,8 +63,7 @@ class Sign extends React.Component {
     axios.post('/sign', data, { // receive two parameter endpoint url ,form data
      })
      .then(res => { // then print response status
-       // console.log('res', res);
-       Router.push(`/${res.request.responseURL.split('/').pop()}`)
+       window.location.href = '/record';
      })
   }
 

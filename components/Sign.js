@@ -40,19 +40,6 @@ const Form = styled.form`
   fieldset {
     border: 0;
     padding: 0;
-
-    &[disabled] {
-      opacity: 0.5;
-    }
-    &::before {
-      height: 10px;
-      content: '';
-      display: block;
-      background-image: linear-gradient(to right, #ff3019 0%, #e2b04a 50%, #ff3019 100%);
-    }
-    &[aria-busy='true']::before {
-      background-size: 50% auto;
-    }
   }
 `;
 
@@ -93,11 +80,11 @@ class Sign extends React.Component {
               }}>
               <fieldset>
                 <label htmlFor="name">
-                  Name
+                  Name or participant ID
                   <input
                     type="name"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Name or participant ID"
                     value={this.state.name}
                     onChange={this.saveToState}/>
                 </label>

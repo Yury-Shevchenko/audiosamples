@@ -1,13 +1,59 @@
 import React from 'react'
+import styled from "styled-components"
 import MicRecorder from 'mic-recorder-to-mp3'
-import axios from 'axios';
-import uniqid from 'uniqid';
+import axios from 'axios'
+import uniqid from 'uniqid'
 
-const Mp3Recorder = new MicRecorder({ bitRate: 128 });
+const Mp3Recorder = new MicRecorder({ bitRate: 128 })
 
-const recorderStyle = {
-  background: '#fffdfd'
-};
+const StyledRecorder = styled.div`
+  font-size: 2rem;
+  line-height: 1.5;
+  font-weight: 600;
+  label {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    &:focus {
+      outline: 0;
+      border-color: ${props => props.theme.red};
+    }
+  }
+  header {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+  button,
+  input[type='submit'] {
+    width: auto;
+    background: #4ffaca30;
+    border: 0;
+    font-size: 3rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    height: 100px;
+    cursor: pointer;
+  }
+  fieldset {
+    border: 0;
+    padding: 0;
+  }
+  audio {
+    margin-top: 10px;
+  }
+`;
 
 class Recorder extends React.Component {
 
@@ -103,7 +149,7 @@ class Recorder extends React.Component {
   render() {
     const { formData } = this.state
     return (
-        <div id="container">
+        <StyledRecorder>
           <h1>
             Recorder
           </h1>
@@ -122,7 +168,7 @@ class Recorder extends React.Component {
             <button onClick={this.save} disabled={this.state.isRecording || !this.state.blobURL }>Save</button>
           </header>
           { this.state.blobURL && <audio src={this.state.blobURL} controls="controls" />}
-        </div>
+        </StyledRecorder>
     )
   }
 

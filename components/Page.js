@@ -27,9 +27,9 @@ const Inner = styled.div`
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2');
-    format('woff2');
+    font-family: 'lato_regular';
+    src: url('/Lato-Regular.ttf');
+    format('ttf');
     font-weight: normal;
     font-style: normal;
   }
@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 2;
+    font-family: 'lato_regular';
   }
   a {
     text-decoration: none;

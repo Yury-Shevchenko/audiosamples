@@ -14,8 +14,11 @@ export default class extends React.Component {
     return (
       <Layout>
         <h1>
-          Records app
+          Audio recording app
         </h1>
+        <p>
+          Sign up and record your audio.
+        </p>
       </Layout>
     )
   }

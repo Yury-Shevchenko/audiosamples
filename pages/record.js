@@ -54,7 +54,7 @@ export default class extends React.Component {
       <Layout>
         <Recorder onUpload={this.onUpload}  user={this.props.user} />
         <h1>
-          Records list
+          Your records
         </h1>
         <div id="reading-list">
           <ul>

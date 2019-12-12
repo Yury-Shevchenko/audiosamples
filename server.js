@@ -4,6 +4,7 @@ require("dotenv").config()
 const cookieParser = require('cookie-parser')
 // const { MongoClient } = require('mongodb')
 // const api = require('./lib/api')
+const path = require('path');
 const body = require('body-parser')
 const co = require('co')
 const express = require('express')
@@ -48,7 +49,8 @@ app.prepare().then( async () => {
   // const db = client.db('stutter')
 
   const server = express()
-  server.use(express.static('public'))
+  // server.use(express.static('public'))
+  // server.use(express.static(path.join(__dirname, 'public')));
   server.use(cookieParser())
   server.use(body.json())
   server.use(body.urlencoded({ extended: true }))

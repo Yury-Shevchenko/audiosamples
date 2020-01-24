@@ -11,6 +11,10 @@ const userSchema = new Schema({
         default      : Date.now
     },
     level            : Number, //The normal user is 1, the admin is 11, the Superadmin is 101
+    studies          : [{
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'project'
+                      }]
 })
 
 //methods

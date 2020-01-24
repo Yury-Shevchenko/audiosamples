@@ -1,7 +1,10 @@
-import styled from "styled-components";
+import styled from "styled-components"
 import Moment from 'react-moment'
 import axios from 'axios'
 import Router from 'next/router'
+// import { withRouter } from 'next/router'
+
+
 
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -46,12 +49,24 @@ const Form = styled.form`
 
 class Sign extends React.Component {
 
-  state = {
-    name: '',
-    password: '',
-    confirmPassword: '',
-    email: '',
+
+
+  constructor(props){
+    super(props)
+    this.state = {
+      name: '',
+      password: '',
+      confirmPassword: '',
+      email: '',
+    }
   }
+
+  componentDidMount(){
+    // const router = withRouter()
+    console.log("Mounted", Router.query)
+  }
+
+
 
   saveToState = (e) => {
     this.setState({ [e.target.name]: e.target.value })
@@ -59,7 +74,7 @@ class Sign extends React.Component {
 
   signin = (data) => {
     // console.log('signing in with', data);
-
+    data.invitetoken = Router.query.invitetoken
     axios.post('/sign', data, { // receive two parameter endpoint url ,form data
      })
      .then(res => { // then print response status
@@ -78,6 +93,9 @@ class Sign extends React.Component {
                 this.setState({name: '', password: '', confirmPassword: '', email: '',})
               }}>
               <fieldset>
+                <h1>
+
+                </h1>
                 <label htmlFor="name">
                   Name or participant ID
                   <input

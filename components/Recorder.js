@@ -58,7 +58,7 @@ const StyledRecorder = styled.div`
 class Recorder extends React.Component {
 
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       isRecording: false,
       blobURL: '',
@@ -68,7 +68,7 @@ class Recorder extends React.Component {
       formData: { title: '' },
       filename: '',
       author: ''
-    };
+    }
   }
 
   start = () => {

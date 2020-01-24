@@ -24,6 +24,9 @@ export default function Header({ user }) {
           </Link>
           {user && (
             <>
+              <Link href="/study/my">
+                <a className="nav-link">Studies</a>
+              </Link>
               <Link href="/record">
                 <a className="nav-link">Record</a>
               </Link>

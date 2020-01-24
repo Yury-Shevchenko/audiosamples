@@ -28,6 +28,7 @@ mongoose.connection.on('error', (err) => {
 
 require('./models/User')
 require('./models/Record')
+require('./models/Project')
 
 // next app
 const dev = process.env.NODE_ENV !== 'production'
@@ -38,6 +39,7 @@ const handle = app.getRequestHandler()
 require('./handlers/passport')
 const authRoutes = require("./lib/auth-routes")
 const databaseRoutes = require("./lib/databaseRoutes")
+const studyRoutes = require("./lib/studyRoutes")
 
 app.prepare().then( async () => {
 
@@ -101,6 +103,7 @@ app.prepare().then( async () => {
 
   server.use(authRoutes)
   server.use('/api', databaseRoutes)
+  server.use('/study', studyRoutes)
   server.get('*', (req, res) => handle(req, res))
   // you are restricting access to some routes
   // const restrictAccess = (req, res, next) => {

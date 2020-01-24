@@ -19,9 +19,6 @@ export default class extends React.Component {
       <StyledRecord>
         <div>
           <div>
-            <span className="remove" onClick={this.props.onRemove(this.props.record._id)}>
-              &times;
-            </span>&nbsp;
             <i>{this.props.record.title}</i> by {this.props.record.author} at <Moment format="YYYY-MM-DD HH:mm:ss">{this.props.record.createdAt}</Moment>
           </div>
           <div>

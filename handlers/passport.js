@@ -2,6 +2,7 @@ const passport = require('passport')
 const mongoose = require('mongoose')
 const User = mongoose.model('user')
 const validator = require('validator')
+const Project = mongoose.model('project')
 
 const LocalStrategy = require('passport-local').Strategy
 
@@ -27,8 +28,8 @@ passport.use('local-signup', new LocalStrategy({
     console.log('trying passport', req.body)
     const normEmail = validator.normalizeEmail(email)
     console.log('normEmail', normEmail)
-    process.nextTick(function() {
-      User.findOne({ email :  normEmail }, function(err, user) {
+    process.nextTick( function() {
+      User.findOne({ email :  normEmail }, async function(err, user) {
         if (req.body.password !== req.body['confirmPassword']) {
           return done(null, false)
         }
@@ -41,6 +42,15 @@ passport.use('local-signup', new LocalStrategy({
           newUser.name    = req.body.name
           newUser.email    = normEmail
           newUser.password = newUser.generateHash(password);
+          if(req.body.invitetoken){
+            newUser.studies = [req.body.invitetoken]
+            const project = await Project.findOneAndUpdate({_id: req.body.invitetoken},
+                { ['$addToSet'] : {
+                  users: newUser.id
+                } },
+                { new : true }
+            );
+          };
           newUser.save(function(err) {
             if (err) throw err;
             return done(null, newUser);

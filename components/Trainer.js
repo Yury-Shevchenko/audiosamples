@@ -8,7 +8,7 @@ import levenshteinDistance from '../lib/train/evaluate';
 
 const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
-let recognition;
+let recognition = true;
 let line;
 let lineDelete;
 let lineText;
@@ -91,7 +91,11 @@ class Trainer extends React.Component {
     );
     window.SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (window.SpeechRecognition) recognition = new SpeechRecognition();
+    if (window.SpeechRecognition) {
+      recognition = new SpeechRecognition();
+    } else {
+      recognition = false;
+    }
     words = document.querySelector('.words');
   }
 
@@ -163,14 +167,18 @@ class Trainer extends React.Component {
   };
 
   train = () => {
-    words.innerText = '';
-    trainPhrase =
-      tongueTwisters[Math.floor(Math.random() * tongueTwisters.length)];
-    const phrase = document.createElement('h1');
-    phrase.id = 'targetPhrase';
-    phrase.textContent = trainPhrase;
-    words.appendChild(phrase);
-    this.start();
+    if (!recognition) {
+      alert('Please change your browser to Chrome to use the trainer');
+    } else {
+      words.innerText = '';
+      trainPhrase =
+        tongueTwisters[Math.floor(Math.random() * tongueTwisters.length)];
+      const phrase = document.createElement('h1');
+      phrase.id = 'targetPhrase';
+      phrase.textContent = trainPhrase;
+      words.appendChild(phrase);
+      this.start();
+    }
   };
 
   evaluateResult = () => {
@@ -226,7 +234,7 @@ class Trainer extends React.Component {
             <div className="words"></div>
           </>
         ) : (
-          <p>Pleas change your browser to Chrome to use the trainer</p>
+          <p>Please change your browser to Chrome to use the trainer</p>
         )}
       </StyledTrainer>
     );

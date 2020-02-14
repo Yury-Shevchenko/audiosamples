@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import Moment from 'react-moment'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Moment from 'react-moment';
 
 const StyledRecord = styled.div`
   margin: 15px;
@@ -12,22 +13,32 @@ const StyledRecord = styled.div`
   }
 `;
 
-export default class extends React.Component {
+export default class Listen extends React.Component {
+  render() {
+    const { record } = this.props;
+    const survey = (record.survey && JSON.parse(record.survey)) || {};
 
-  render(){
     return (
       <StyledRecord>
         <div>
           <div>
-            <i>{this.props.record.title}</i> by {this.props.record.author} at <Moment format="YYYY-MM-DD HH:mm:ss">{this.props.record.createdAt}</Moment>
+            <i>{record.title}</i> by {record.author} at{' '}
+            <Moment format="YYYY-MM-DD HH:mm:ss">{record.createdAt}</Moment>
           </div>
           <div>
             <span>
-              <audio src={`/api/play/${this.props.record._id}`} controls="controls" />
+              <audio src={`/api/play/${record._id}`} controls="controls" />
             </span>
+          </div>
+          <div>
+            {Object.keys(survey).map(k => (
+              <p key={k}>
+                {k} : {survey[k]}
+              </p>
+            ))}
           </div>
         </div>
       </StyledRecord>
-    )
+    );
   }
 }

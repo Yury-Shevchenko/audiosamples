@@ -1,7 +1,7 @@
-import styled from "styled-components"
-import Moment from 'react-moment'
-import axios from 'axios'
-import Router from 'next/router'
+import styled from 'styled-components';
+import Moment from 'react-moment';
+import axios from 'axios';
+import Router from 'next/router';
 
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -43,64 +43,65 @@ const Form = styled.form`
   }
 `;
 
-
 class Login extends React.Component {
-
   state = {
     name: '',
     password: '',
     email: '',
-  }
+  };
 
-  saveToState = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  saveToState = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-  signin = (data) => {
-    axios.post('/login', data, { // receive two parameter endpoint url ,form data
-     })
-     .then(res => { // then print response status
-       window.location.href = '/record';
-     })
-  }
+  signin = data => {
+    axios
+      .post('/login', data, {
+        // receive two parameter endpoint url ,form data
+      })
+      .then(res => {
+        // then print response status
+        window.location.href = '/record';
+      });
+  };
 
-  render(){
+  render() {
+    return (
+      <Form
+        method="post"
+        onSubmit={async e => {
+          e.preventDefault();
+          const res = await this.signin(this.state);
+          this.setState({ name: '', password: '', email: '' });
+        }}
+      >
+        <fieldset>
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              value={this.state.email}
+              onChange={this.saveToState}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.saveToState}
+            />
+          </label>
 
-    return(
-            <Form
-              method="post"
-              onSubmit={ async e => {
-                e.preventDefault()
-                const res = await this.signin(this.state)
-                this.setState({name: '', password: '', email: '',})
-              }}>
-              <fieldset>
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.saveToState}/>
-                </label>
-                <label htmlFor="password">
-                  Password
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.saveToState}/>
-                </label>
-
-                <button type="submit">Log in</button>
-
-              </fieldset>
-            </Form>
-          )
-
+          <button type="submit">Log in</button>
+        </fieldset>
+      </Form>
+    );
   }
 }
 
-export default Login
+export default Login;

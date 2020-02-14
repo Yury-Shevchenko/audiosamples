@@ -1,10 +1,8 @@
-import styled from "styled-components"
-import Moment from 'react-moment'
-import axios from 'axios'
-import Router from 'next/router'
+import styled from 'styled-components';
+import Moment from 'react-moment';
+import axios from 'axios';
+import Router from 'next/router';
 // import { withRouter } from 'next/router'
-
-
 
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -46,100 +44,108 @@ const Form = styled.form`
   }
 `;
 
-
 class Sign extends React.Component {
-
-
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       password: '',
       confirmPassword: '',
       email: '',
-    }
+      invitetoken: '',
+    };
   }
 
-  componentDidMount(){
-    // const router = withRouter()
-    console.log("Mounted", Router.query)
+  componentDidMount() {
+    const invitetoken = Router.query.invitetoken || '';
+    this.setState({
+      invitetoken,
+    });
   }
 
+  saveToState = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-
-  saveToState = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  signin = (data) => {
+  signin = data => {
     // console.log('signing in with', data);
-    data.invitetoken = Router.query.invitetoken
-    axios.post('/sign', data, { // receive two parameter endpoint url ,form data
-     })
-     .then(res => { // then print response status
-       window.location.href = '/record';
-     })
-  }
+    // data.invitetoken = Router.query.invitetoken;
+    axios
+      .post('/sign', data, {
+        // receive two parameter endpoint url ,form data
+      })
+      .then(res => {
+        // then print response status
+        window.location.href = '/record';
+      });
+  };
 
-  render(){
+  render() {
+    return (
+      <Form
+        method="post"
+        onSubmit={async e => {
+          e.preventDefault();
+          const res = await this.signin(this.state);
+          this.setState({
+            name: '',
+            password: '',
+            confirmPassword: '',
+            email: '',
+          });
+        }}
+      >
+        <fieldset>
+          <h1>
+            {this.state.invitetoken &&
+              `You are invited to participate in a study`}
+          </h1>
+          <label htmlFor="name">
+            Name or participant ID
+            <input
+              type="name"
+              name="name"
+              placeholder="Name or participant ID"
+              value={this.state.name}
+              onChange={this.saveToState}
+            />
+          </label>
+          <label htmlFor="email">
+            Email
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={this.state.email}
+              onChange={this.saveToState}
+            />
+          </label>
+          <label htmlFor="password">
+            Password
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.saveToState}
+            />
+          </label>
+          <label htmlFor="confirmPassword">
+            Confirm password
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm password"
+              value={this.state.confirmPassword}
+              onChange={this.saveToState}
+            />
+          </label>
 
-    return(
-            <Form
-              method="post"
-              onSubmit={ async e => {
-                e.preventDefault()
-                const res = await this.signin(this.state)
-                this.setState({name: '', password: '', confirmPassword: '', email: '',})
-              }}>
-              <fieldset>
-                <h1>
-
-                </h1>
-                <label htmlFor="name">
-                  Name or participant ID
-                  <input
-                    type="name"
-                    name="name"
-                    placeholder="Name or participant ID"
-                    value={this.state.name}
-                    onChange={this.saveToState}/>
-                </label>
-                <label htmlFor="email">
-                  Email
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={this.state.email}
-                    onChange={this.saveToState}/>
-                </label>
-                <label htmlFor="password">
-                  Password
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    onChange={this.saveToState}/>
-                </label>
-                <label htmlFor="confirmPassword">
-                  Confirm password
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm password"
-                    value={this.state.confirmPassword}
-                    onChange={this.saveToState}/>
-                </label>
-
-                <button type="submit">Sign in</button>
-
-              </fieldset>
-            </Form>
-          )
-
+          <button type="submit">Sign in</button>
+        </fieldset>
+      </Form>
+    );
   }
 }
 
-export default Sign
+export default Sign;

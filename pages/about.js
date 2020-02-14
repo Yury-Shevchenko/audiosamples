@@ -1,9 +1,18 @@
-import Layout from '../components/MyLayout'
+import Layout from '../components/MyLayout';
 
 export default function About() {
-  return(
+  return (
     <Layout>
-      <p>2019 Created by <a target='_blank' href="https://iscience.uni-konstanz.de/team/yury-shevchenko/">Yury Shevchenko</a> 🚀</p>
+      <p>
+        2019 Created by{' '}
+        <a
+          target="_blank"
+          href="https://iscience.uni-konstanz.de/team/yury-shevchenko/"
+        >
+          Yury Shevchenko
+        </a>{' '}
+        🚀
+      </p>
     </Layout>
   );
 }

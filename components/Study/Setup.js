@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Moment from 'react-moment'
-import axios from 'axios'
-import Router from 'next/router'
-import React from 'react'
+import styled from 'styled-components';
+import Moment from 'react-moment';
+import axios from 'axios';
+import Router from 'next/router';
+import React from 'react';
 
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -44,52 +44,51 @@ const Form = styled.form`
   }
 `;
 
-
 class Setup extends React.Component {
-
   state = {
     name: '',
-  }
+  };
 
-  saveToState = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-  }
+  saveToState = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-  setup = (data) => {
-    axios.post('/study/create', data, { // receive two parameter endpoint url ,form data
-     })
-     .then(res => {
-       this.props.onCreate(res.data);
-     })
-  }
+  setup = data => {
+    axios
+      .post('/study/create', data, {
+        // receive two parameter endpoint url ,form data
+      })
+      .then(res => {
+        this.props.onCreate(res.data);
+      });
+  };
 
-  render(){
-
-    return(
-            <Form
-              method="post"
-              onSubmit={ async e => {
-                e.preventDefault()
-                const res = await this.setup(this.state)
-                this.setState({name: ''})
-              }}>
-              <fieldset>
-                <label htmlFor="name">
-                  Name
-                  <input
-                    type="name"
-                    name="name"
-                    placeholder="Name"
-                    value={this.state.name}
-                    onChange={this.saveToState}/>
-                </label>
-                <button type="submit">Launch</button>
-
-              </fieldset>
-            </Form>
-          )
-
+  render() {
+    return (
+      <Form
+        method="post"
+        onSubmit={async e => {
+          e.preventDefault();
+          const res = await this.setup(this.state);
+          this.setState({ name: '' });
+        }}
+      >
+        <fieldset>
+          <label htmlFor="name">
+            Name
+            <input
+              type="name"
+              name="name"
+              placeholder="Name"
+              value={this.state.name}
+              onChange={this.saveToState}
+            />
+          </label>
+          <button type="submit">Launch</button>
+        </fieldset>
+      </Form>
+    );
   }
 }
 
-export default Setup
+export default Setup;

@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
 const Meta = () => (
   <Head>
@@ -6,6 +6,6 @@ const Meta = () => (
     <meta charSet="utf-8" />
     <title>Audio samples</title>
   </Head>
-)
+);
 
-export default Meta
+export default Meta;

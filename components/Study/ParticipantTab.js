@@ -1,6 +1,6 @@
-import styled from "styled-components"
-import Moment from 'react-moment'
-import Link from 'next/link'
+import styled from 'styled-components';
+import Moment from 'react-moment';
+import Link from 'next/link';
 
 const StyledStudyTab = styled.div`
   margin: 15px;
@@ -16,18 +16,20 @@ const StyledStudyTab = styled.div`
 `;
 
 export default class extends React.Component {
-
-  render(){
+  render() {
     return (
       <StyledStudyTab>
         <div>
-            <Link href="/u/[id]" as={`/u/${this.props.user.id}`}>
-              <a>
-                <i>{this.props.user.name}</i> registered at <Moment format="YYYY-MM-DD HH:mm:ss">{this.props.user.createdAt}</Moment>
-              </a>
-            </Link>
+          <Link href="/u/[id]" as={`/u/${this.props.user.id}`}>
+            <a>
+              <i>{this.props.user.name}</i> registered at{' '}
+              <Moment format="YYYY-MM-DD HH:mm:ss">
+                {this.props.user.createdAt}
+              </Moment>
+            </a>
+          </Link>
         </div>
       </StyledStudyTab>
-    )
+    );
   }
 }

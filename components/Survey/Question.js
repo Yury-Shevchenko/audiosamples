@@ -3,8 +3,17 @@ import styled from 'styled-components';
 
 const StyledQuestion = styled.div`
   display: grid;
-  grid-template-columns: 200px repeat(7, 1fr);
-  align-items: baseline;
+  align-items: center;
+  grid-column-gap: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0fef5;
+`;
+
+const StyledButtons = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-column-gap: 5px;
+  grid-row-gap: 5px;
 `;
 
 class Question extends Component {
@@ -23,76 +32,78 @@ class Question extends Component {
     return (
       <StyledQuestion>
         <h4>{question}</h4>
-        <button
-          type="button"
-          value="1"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          1
-        </button>
-        <button
-          type="button"
-          value="2"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          2
-        </button>
-        <button
-          type="button"
-          value="3"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          3
-        </button>
-        <button
-          type="button"
-          value="4"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          4
-        </button>
-        <button
-          type="button"
-          value="5"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          5
-        </button>
-        <button
-          type="button"
-          value="6"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          6
-        </button>
-        <button
-          type="button"
-          value="7"
-          name={code}
-          onClick={e => {
-            this.chooseResponse(e);
-          }}
-        >
-          7
-        </button>
+        <StyledButtons>
+          <button
+            type="button"
+            value="1"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            1
+          </button>
+          <button
+            type="button"
+            value="2"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            2
+          </button>
+          <button
+            type="button"
+            value="3"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            3
+          </button>
+          <button
+            type="button"
+            value="4"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            4
+          </button>
+          <button
+            type="button"
+            value="5"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            5
+          </button>
+          <button
+            type="button"
+            value="6"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            6
+          </button>
+          <button
+            type="button"
+            value="7"
+            name={code}
+            onClick={e => {
+              this.chooseResponse(e);
+            }}
+          >
+            7
+          </button>
+        </StyledButtons>
       </StyledQuestion>
     );
   }

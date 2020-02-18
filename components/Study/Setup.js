@@ -31,12 +31,13 @@ const Form = styled.form`
   button,
   input[type='submit'] {
     width: auto;
-    background: red;
-    color: white;
+    background: #4ffaca30;
     border: 0;
     font-size: 2rem;
     font-weight: 600;
     padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    height: 100px;
   }
   fieldset {
     border: 0;
@@ -82,6 +83,7 @@ class Setup extends React.Component {
               placeholder="Name"
               value={this.state.name}
               onChange={this.saveToState}
+              required
             />
           </label>
           <button type="submit">Launch</button>

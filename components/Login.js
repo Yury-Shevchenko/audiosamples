@@ -30,12 +30,12 @@ const Form = styled.form`
   button,
   input[type='submit'] {
     width: auto;
-    background: red;
-    color: white;
+    background: #4ffaca30;
     border: 0;
     font-size: 2rem;
     font-weight: 600;
     padding: 0.5rem 1.2rem;
+    cursor: pointer;
   }
   fieldset {
     border: 0;

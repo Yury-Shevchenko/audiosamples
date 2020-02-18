@@ -47,9 +47,9 @@ passport.use(
           newUser.name = req.body.name;
           newUser.email = normEmail;
           newUser.password = newUser.generateHash(password);
-          if (req.body.invitetoken) {
+          if (req.body.study) {
             const project = await Project.findOneAndUpdate(
-              { invitetoken: req.body.invitetoken },
+              { _id: req.body.study },
               {
                 $addToSet: {
                   users: newUser.id,

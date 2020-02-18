@@ -200,13 +200,22 @@ class Recorder extends React.Component {
           </form>
         </div>
         <header>
-          <button onClick={this.start} disabled={this.state.isRecording}>
+          <button
+            type="button"
+            onClick={this.start}
+            disabled={this.state.isRecording}
+          >
             New record
           </button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>
+          <button
+            type="button"
+            onClick={this.stop}
+            disabled={!this.state.isRecording}
+          >
             Stop
           </button>
           <button
+            type="button"
             onClick={this.save}
             disabled={this.state.isRecording || !this.state.blobURL}
           >
@@ -220,6 +229,15 @@ class Recorder extends React.Component {
           open={this.state.showSurvey}
           onInput={this.updateSurveyResults}
         />
+        {this.state.showSurvey && (
+          <button
+            type="button"
+            onClick={this.save}
+            disabled={this.state.isRecording || !this.state.blobURL}
+          >
+            Save
+          </button>
+        )}
       </StyledRecorder>
     );
   }

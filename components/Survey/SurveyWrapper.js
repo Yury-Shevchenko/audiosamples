@@ -8,7 +8,6 @@ const StyledSurvey = styled.div`
   height: ${props => (props.open ? '100%' : '0')};
   top: 0;
   right: 0;
-  min-width: 500px;
   bottom: 0;
   transform: translateX(-500%);
   transition: opacity 1s, transform 1s, height 1s;
@@ -31,7 +30,8 @@ class Survey extends Component {
       <div>
         <StyledSurvey open={this.props.open}>
           <h3>Bewertung pro Item auf einer Skala von 1 bis 7 wobei</h3>
-          <h3>1 = trifft überhaupt nicht zu und</h3>
+          <h3>1 = trifft überhaupt nicht zu</h3>
+          <p>und</p>
           <h3>7 = trifft sehr stark zu</h3>
           <Question
             question="Ich bin frustriert wegen dem Stottern"

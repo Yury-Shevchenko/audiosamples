@@ -1,8 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
-import Moment from 'react-moment';
 import axios from 'axios';
-import Router from 'next/router';
-// import { withRouter } from 'next/router'
 
 const Form = styled.form`
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
@@ -31,12 +29,12 @@ const Form = styled.form`
   button,
   input[type='submit'] {
     width: auto;
-    background: red;
-    color: white;
+    background: #4ffaca30;
     border: 0;
     font-size: 2rem;
     font-weight: 600;
     padding: 0.5rem 1.2rem;
+    cursor: pointer;
   }
   fieldset {
     border: 0;
@@ -52,14 +50,14 @@ class Sign extends React.Component {
       password: '',
       confirmPassword: '',
       email: '',
-      invitetoken: '',
+      study: '',
     };
   }
 
   componentDidMount() {
-    const invitetoken = Router.query.invitetoken || '';
+    const { study } = this.props;
     this.setState({
-      invitetoken,
+      study,
     });
   }
 
@@ -96,10 +94,6 @@ class Sign extends React.Component {
         }}
       >
         <fieldset>
-          <h1>
-            {this.state.invitetoken &&
-              `You are invited to participate in a study`}
-          </h1>
           <label htmlFor="name">
             Name or participant ID
             <input
